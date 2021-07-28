@@ -1,19 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const Op = require("Sequelize").Op;
 const { Tasks, Users } = require("../models");
 
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
 router.get("/", validateToken, async (req, res) => {
-  const tasksList = await Tasks.findAll(/*{
-    where: {
-      [Op.or]: [
-        { creatorUserId: { [Op.eq]: req.user.id } },
-        { resUserId: { [Op.eq]: req.user.id } },
-      ],
-    },
-  }*/);
+  const tasksList = await Tasks.findAll();
 
   // Getting responsive's usernames for Tasks
   const resUserPromises = [];
@@ -36,18 +28,6 @@ router.get("/", validateToken, async (req, res) => {
     res.json({ tasksList });
   });
 });
-
-// router.get("/:id", validateToken, async (req, res) => {
-//   const task_id = req.params.id;
-//   await Tasks.findOne({ where: { id: task_id } })
-//     .then((result) => {
-//       console.log(result);
-//       res.json(result);
-//     })
-//     .catch((err) => {
-//       res.json({ error: err.name });
-//     });
-// });
 
 router.post("/", validateToken, async (req, res) => {
   const task = {
