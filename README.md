@@ -10,7 +10,7 @@ In the project directory on the client, you can run:
 
 And on the server:
 
-### `npm devStart`
+### `npm run devStart`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it on the client side.
