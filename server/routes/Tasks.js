@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const Op = require("Sequelize").Op;
 const { Tasks, Users } = require("../models");
 
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
 const { camelize } = require("../utils/camelize");
+const { onlyUnique } = require("../utils/unique");
 
 router.get("/", validateToken, async (req, res) => {
   // Pagination and sort by updated order
@@ -23,20 +25,26 @@ router.get("/", validateToken, async (req, res) => {
   const tasksCount = tasksListAndCount.count;
 
   // Getting responsible's usernames for Tasks
-  const resUserPromises = [];
-  tasksList.forEach((task) => {
-    const user = Users.findOne({ where: { id: task.dataValues.res_user_id } });
+  const resUserIds = [];
+  tasksList.forEach((task) => resUserIds.push(task.dataValues.res_user_id));
 
-    resUserPromises.push(user);
-  });
+  const resUserUniqueIds = resUserIds.filter(onlyUnique);
 
-  const resUsernames = [];
-  await Promise.all(resUserPromises).then((responses) => {
-    responses.forEach((response) => {
-      resUsernames.push(response.dataValues.username);
+  const resUsernames = new Map();
+
+  await Users.findAll({
+    where: {
+      id: {
+        [Op.in]: resUserUniqueIds,
+      },
+    },
+  }).then((result) => {
+    result.forEach((user) => {
+      resUsernames.set(user.dataValues.id, user.dataValues.username);
     });
   });
 
+  // Writing responsible's usernames in tasksList
   for (let i in tasksList) {
     const task = tasksList[i].dataValues;
 
@@ -50,7 +58,9 @@ router.get("/", validateToken, async (req, res) => {
       }
     }
 
-    tasksList[i].dataValues.resUsername = resUsernames[i];
+    tasksList[i].dataValues.resUsername = resUsernames.get(
+      tasksList[i].dataValues.resUserId
+    );
   }
 
   res.json({ tasksList, tasksCount });
