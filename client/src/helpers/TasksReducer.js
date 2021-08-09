@@ -19,8 +19,8 @@ const TasksReducer = (state, action) => {
     case CREATE_TASK:
       return {
         ...state,
-        tasksList: [...state.tasksList, action.payload],
-        cachedTasksList: [...state.cachedTasksList, action.payload],
+        tasksList: [action.payload, ...state.tasksList],
+        cachedTasksList: [action.payload, ...state.cachedTasksList],
       };
     case EDIT_STATUS:
       return {
@@ -100,4 +100,4 @@ const TasksReducer = (state, action) => {
   }
 };
 
-export default TasksReducer
+export default TasksReducer;
