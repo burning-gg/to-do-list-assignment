@@ -1,14 +1,7 @@
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 
-export const Wrapper = styled.div`
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  min-height: 80vh; */
-`;
+export const Wrapper = styled.div``;
 
 export const Content = styled.div`
   display: flex;

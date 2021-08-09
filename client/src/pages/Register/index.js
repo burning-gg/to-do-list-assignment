@@ -15,21 +15,21 @@ function Register() {
   let history = useHistory();
 
   const initialValues = {
-    first_name: "",
-    last_name: "",
-    middle_name: "",
+    firstName: "",
+    lastName: "",
+    middleName: "",
     username: "",
     password: "",
-    manager_username: "",
+    managerUsername: "",
   };
 
   const validationSchema = yup.object().shape({
-    first_name: yup.string().required(),
-    last_name: yup.string().required(),
-    middle_name: yup.string().required(),
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+    middleName: yup.string().required(),
     username: yup.string().min(3).max(15).required(),
     password: yup.string().min(4).max(20).required(),
-    manager_username: yup.string(),
+    managerUsername: yup.string(),
   });
 
   const onSubmit = (data) => {
@@ -45,6 +45,7 @@ function Register() {
             clearTimeout(timer);
           }
         }, 3000);
+
       } else history.push("/login");
     });
   };
@@ -66,37 +67,37 @@ function Register() {
           )}
 
           <StyledTextField
-            id="first_name"
-            name="first_name"
+            id="firstName"
+            name="firstName"
             label="First name"
-            value={formik.values.first_name}
+            value={formik.values.firstName}
             onChange={formik.handleChange}
             error={
-              formik.touched.first_name && Boolean(formik.errors.first_name)
+              formik.touched.firstName && Boolean(formik.errors.firstName)
             }
-            helperText={formik.touched.first_name && formik.errors.first_name}
+            helperText={formik.touched.firstName && formik.errors.firstName}
           />
 
           <StyledTextField
-            id="last_name"
-            name="last_name"
+            id="lastName"
+            name="lastName"
             label="Last name"
-            value={formik.values.last_name}
+            value={formik.values.lastName}
             onChange={formik.handleChange}
-            error={formik.touched.last_name && Boolean(formik.errors.last_name)}
-            helperText={formik.touched.last_name && formik.errors.last_name}
+            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+            helperText={formik.touched.lastName && formik.errors.lastName}
           />
 
           <StyledTextField
-            id="middle_name"
-            name="middle_name"
+            id="middleName"
+            name="middleName"
             label="Middle name"
-            value={formik.values.middle_name}
+            value={formik.values.middleName}
             onChange={formik.handleChange}
             error={
-              formik.touched.middle_name && Boolean(formik.errors.middle_name)
+              formik.touched.middleName && Boolean(formik.errors.middleName)
             }
-            helperText={formik.touched.middle_name && formik.errors.middle_name}
+            helperText={formik.touched.middleName && formik.errors.middleName}
           />
 
           <StyledTextField
@@ -121,17 +122,17 @@ function Register() {
           />
 
           <StyledTextField
-            id="manager_username"
-            name="manager_username"
+            id="managerUsername"
+            name="managerUsername"
             label="Your manager username"
-            value={formik.values.manager_username}
+            value={formik.values.managerUsername}
             onChange={formik.handleChange}
             error={
-              formik.touched.manager_username &&
-              Boolean(formik.errors.manager_username)
+              formik.touched.managerUsername &&
+              Boolean(formik.errors.managerUsername)
             }
             helperText={
-              formik.touched.manager_username && formik.errors.manager_username
+              formik.touched.managerUsername && formik.errors.managerUsername
             }
           />
 

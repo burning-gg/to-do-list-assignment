@@ -29,19 +29,19 @@ function CreateTask({ setOpen }) {
   const initialValues = {
     title: "",
     description: "",
-    ends_at: "",
+    endsAt: "",
     priority: "medium",
     status: "to start",
-    res_username: "",
+    resUsername: "",
   };
 
   const validationSchema = yup.object().shape({
     title: yup.string().required(),
     description: yup.string().required(),
-    ends_at: yup.date().required(),
+    endsAt: yup.date().required(),
     priority: yup.string().required(),
     status: yup.string().required(),
-    res_username: yup.string().required(),
+    resUsername: yup.string().required(),
   });
 
   const onSubmit = (data) => {
@@ -108,17 +108,17 @@ function CreateTask({ setOpen }) {
           />
 
           <StyledTextField
-            id="ends_at"
-            name="ends_at"
+            id="endsAt"
+            name="endsAt"
             label="Ends at"
             type="datetime-local"
             InputLabelProps={{
               shrink: true,
             }}
-            value={formik.values.ends_at}
+            value={formik.values.endsAt}
             onChange={formik.handleChange}
-            error={formik.touched.ends_at && Boolean(formik.errors.ends_at)}
-            helperText={formik.touched.ends_at && formik.errors.ends_at}
+            error={formik.touched.endsAt && Boolean(formik.errors.endsAt)}
+            helperText={formik.touched.endsAt && formik.errors.endsAt}
           />
 
           <StyledTextField
@@ -167,16 +167,16 @@ function CreateTask({ setOpen }) {
           </StyledTextField>
 
           <StyledTextField
-            id="res_username"
-            name="res_username"
+            id="resUsername"
+            name="resUsername"
             label="Responsible's username"
-            value={formik.values.res_username}
+            value={formik.values.resUsername}
             onChange={formik.handleChange}
             error={
-              formik.touched.res_username && Boolean(formik.errors.res_username)
+              formik.touched.resUsername && Boolean(formik.errors.resUsername)
             }
             helperText={
-              formik.touched.res_username && formik.errors.res_username
+              formik.touched.resUsername && formik.errors.resUsername
             }
           />
 

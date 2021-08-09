@@ -17,12 +17,12 @@ function Header() {
     sessionStorage.removeItem("accessToken");
     setAuthState({
       id: 0,
-      first_name: "",
-      last_name: "",
-      middle_name: "",
+      firstName: "",
+      lastName: "",
+      middleName: "",
       username: "",
-      manager_username: "",
-      is_manager: false,
+      managerUsername: "",
+      isManager: false,
       status: false,
     });
     history.push("/");

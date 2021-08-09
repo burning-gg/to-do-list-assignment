@@ -35,8 +35,8 @@ function Panel() {
       tomorrow.setDate(tomorrow.getDate() + 1);
 
       return (
-        moment(task.ends_at).isSameOrAfter(now) &&
-        moment(task.ends_at).isSameOrBefore(tomorrow.toISOString())
+        moment(task.endsAt).isSameOrAfter(now) &&
+        moment(task.endsAt).isSameOrBefore(tomorrow.toISOString())
       );
     });
     filterTasks(todayFilter);
@@ -49,8 +49,8 @@ function Panel() {
       nextWeek.setDate(nextWeek.getDate() + 7);
 
       return (
-        moment(task.ends_at).isSameOrAfter(now) &&
-        moment(task.ends_at).isSameOrBefore(nextWeek.toISOString())
+        moment(task.endsAt).isSameOrAfter(now) &&
+        moment(task.endsAt).isSameOrBefore(nextWeek.toISOString())
       );
     });
     filterTasks(weekFilter);
@@ -61,7 +61,7 @@ function Panel() {
       let nextWeek = new Date();
       nextWeek.setDate(nextWeek.getDate() + 7);
 
-      return moment(task.ends_at).isSameOrAfter(nextWeek);
+      return moment(task.endsAt).isSameOrAfter(nextWeek);
     });
     filterTasks(futureFilter);
   };
@@ -84,10 +84,10 @@ function Panel() {
           <i>
             <AssignmentIndIcon fontSize="inherit" />
           </i>
-          {" " + authState.last_name + " "}
-          {authState.first_name + " "}
-          {authState.middle_name}
-          {authState.is_manager ? ", manager" : ", user"}
+          {" " + authState.lastName + " "}
+          {authState.firstName + " "}
+          {authState.middleName}
+          {authState.isManager ? ", manager" : ", user"}
         </div>
         <div className="options">
           <Button
@@ -111,7 +111,7 @@ function Panel() {
           >
             Future
           </Button>
-          {authState.is_manager && (
+          {authState.isManager && (
             <Button
               variant="contained"
               className="info"
@@ -123,7 +123,7 @@ function Panel() {
           <Button variant="contained" className="primary" onClick={filterReset}>
             Reset
           </Button>
-          {authState.is_manager && (
+          {authState.isManager && (
             <>
               <Button
                 variant="contained"

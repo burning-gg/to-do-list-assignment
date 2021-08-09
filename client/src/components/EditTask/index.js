@@ -21,19 +21,19 @@ function EditTask({ setOpen, task }) {
   const initialValues = {
     title: task.title,
     description: task.description,
-    ends_at: task.ends_at,
+    endsAt: task.endsAt,
     priority: task.priority,
     status: task.status,
-    res_username: task.res_username,
+    resUsername: task.resUsername,
   };
 
   const validationSchema = yup.object().shape({
     title: yup.string().required(),
     description: yup.string().required(),
-    ends_at: yup.date().required(),
+    endsAt: yup.date().required(),
     priority: yup.string().required(),
     status: yup.string().required(),
-    res_username: yup.string().required(),
+    resUsername: yup.string().required(),
   });
 
   const onSubmit = (data) => {
@@ -104,19 +104,19 @@ function EditTask({ setOpen, task }) {
           />
 
           <StyledTextField
-            id="ends_at"
-            name="ends_at"
+            id="endsAt"
+            name="endsAt"
             label="Ends at"
             type="datetime-local"
             InputLabelProps={{
               shrink: true,
             }}
-            value={moment(`${formik.values.ends_at}`).format(
+            value={moment(`${formik.values.endsAt}`).format(
               "YYYY-MM-DDTHH:mm"
             )}
             onChange={formik.handleChange}
-            error={formik.touched.ends_at && Boolean(formik.errors.ends_at)}
-            helperText={formik.touched.ends_at && formik.errors.ends_at}
+            error={formik.touched.endsAt && Boolean(formik.errors.endsAt)}
+            helperText={formik.touched.endsAt && formik.errors.endsAt}
           />
 
           <StyledTextField
@@ -165,16 +165,16 @@ function EditTask({ setOpen, task }) {
           </StyledTextField>
 
           <StyledTextField
-            id="res_username"
-            name="res_username"
+            id="resUsername"
+            name="resUsername"
             label="Responsible's username"
-            value={formik.values.res_username}
+            value={formik.values.resUsername}
             onChange={formik.handleChange}
             error={
-              formik.touched.res_username && Boolean(formik.errors.res_username)
+              formik.touched.resUsername && Boolean(formik.errors.resUsername)
             }
             helperText={
-              formik.touched.res_username && formik.errors.res_username
+              formik.touched.resUsername && formik.errors.resUsername
             }
           />
 

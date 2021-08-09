@@ -35,12 +35,12 @@ function Login() {
         sessionStorage.setItem("accessToken", response.data.token);
         setAuthState({
           id: response.data.id,
-          first_name: response.data.first_name,
-          last_name: response.data.last_name,
-          middle_name: response.data.middle_name,
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
+          middleName: response.data.middleName,
           username: response.data.username,
-          manager_username: response.data.manager_username,
-          is_manager: response.data.is_manager,
+          managerUsername: response.data.managerUsername,
+          isManager: response.data.isManager,
           status: true,
         });
         history.push("/tasks");

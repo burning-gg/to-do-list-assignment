@@ -8,7 +8,7 @@ import {
   COPY_TASKS,
 } from "./types";
 
-export default (state, action) => {
+const TasksReducer = (state, action) => {
   switch (action.type) {
     case FETCH_TASKS:
       return {
@@ -51,10 +51,10 @@ export default (state, action) => {
                 ...task,
                 title: action.payload.title,
                 description: action.payload.description,
-                ends_at: action.payload.ends_at,
+                endsAt: action.payload.endsAt,
                 priority: action.payload.priority,
                 status: action.payload.status,
-                res_username: action.payload.res_username,
+                resUsername: action.payload.resUsername,
               }
             : task
         ),
@@ -64,10 +64,10 @@ export default (state, action) => {
                 ...task,
                 title: action.payload.title,
                 description: action.payload.description,
-                ends_at: action.payload.ends_at,
+                endsAt: action.payload.endsAt,
                 priority: action.payload.priority,
                 status: action.payload.status,
-                res_username: action.payload.res_username,
+                resUsername: action.payload.resUsername,
               }
             : task
         ),
@@ -89,13 +89,15 @@ export default (state, action) => {
       return {
         ...state,
         tasksList: action.payload.sort((a, b) =>
-          a.updated_at > b.updated_at ? -1 : b.updated_at > a.updated_at ? 1 : 0
+          a.updatedAt > b.updatedAt ? -1 : b.updatedAt > a.updatedAt ? 1 : 0
         ),
         cachedTasksList: action.payload.sort((a, b) =>
-          a.updated_at > b.updated_at ? -1 : b.updated_at > a.updated_at ? 1 : 0
+          a.updatedAt > b.updatedAt ? -1 : b.updatedAt > a.updatedAt ? 1 : 0
         ),
       };
     default:
       return state;
   }
 };
+
+export default TasksReducer

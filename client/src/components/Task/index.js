@@ -31,9 +31,9 @@ function Task({ task }) {
     setOpen(false);
   };
 
-  const time = moment(task.ends_at).format("MMMM Do YYYY, h:mm:ss a");
+  const time = moment(task.endsAt).format("MMMM Do YYYY, h:mm:ss a");
 
-  const handleChange = (e) => {
+  const handleChangeStatus = (e) => {
     axios
       .put(
         `http://localhost:3001/tasks/${task.id}`,
@@ -43,7 +43,7 @@ function Task({ task }) {
         }
       )
       .then((response) => {
-        editStatus(task.id, response.data.status);
+        editStatus(task.id, response.data);
       });
   };
 
@@ -64,7 +64,7 @@ function Task({ task }) {
 
   if (task.status === "completed") {
     theme.main = "var(--success)";
-  } else if (moment(task.ends_at).isBefore(new Date().toISOString())) {
+  } else if (moment(task.endsAt).isBefore(new Date().toISOString())) {
     theme.main = "var(--danger)";
   }
 
@@ -106,7 +106,7 @@ function Task({ task }) {
           className="status"
           select
           value={task.status}
-          onChange={handleChange}
+          onChange={handleChangeStatus}
         >
           <MenuItem key={1} value={"to start"} ref={selectMenuItem}>
             to start
@@ -122,8 +122,8 @@ function Task({ task }) {
           </MenuItem>
         </TextField>
         <div className="priority">Priority: {task.priority}</div>
-        <div className="res_user">Responsible: {task.res_username}</div>
-        <div className="ends_at">Ends at: {time}</div>
+        <div className="res_user">Responsible: {task.resUsername}</div>
+        <div className="endsAt">Ends at: {time}</div>
       </Content>
     </Wrapper>
   );
